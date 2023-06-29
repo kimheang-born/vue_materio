@@ -1,14 +1,15 @@
 <script setup>
 import AuthProvider from '@/views/pages/authentication/AuthProvider.vue'
-import { useTheme } from 'vuetify'
 import logo from '@images/logo.svg?raw'
 import authV1MaskDark from '@images/pages/auth-v1-mask-dark.png'
 import authV1MaskLight from '@images/pages/auth-v1-mask-light.png'
 import authV1Tree2 from '@images/pages/auth-v1-tree-2.png'
 import authV1Tree from '@images/pages/auth-v1-tree.png'
+import { useTheme } from 'vuetify'
 
 const form = ref({
   email: '',
+  phoneNumber: '',
   password: '',
   remember: false,
 })
@@ -55,9 +56,9 @@ const isPasswordVisible = ref(false)
             <!-- email -->
             <VCol cols="12">
               <VTextField
-                v-model="form.email"
-                label="Email"
-                type="email"
+                v-model="form.phoneNumber"
+                label="Phone Number"
+                type="text"
               />
             </VCol>
 
