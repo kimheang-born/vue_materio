@@ -5,6 +5,7 @@ import authV1MaskDark from '@images/pages/auth-v1-mask-dark.png'
 import authV1MaskLight from '@images/pages/auth-v1-mask-light.png'
 import authV1Tree2 from '@images/pages/auth-v1-tree-2.png'
 import authV1Tree from '@images/pages/auth-v1-tree.png'
+import { useRouter } from 'vue-router'
 import { useTheme } from 'vuetify'
 import { useStore } from 'vuex'
 
@@ -18,6 +19,7 @@ const form = ref({
 const isLoading = ref(false)
 const error = ref(null)
 
+const router = useRouter()
 const store = useStore()
 
 const vuetifyTheme = useTheme()
@@ -38,6 +40,8 @@ const submitForm = async function () {
     isLoading.value = true
 
     await store.dispatch('login', actionPayload)
+
+    router.push({ name: 'dashboard' })
     
   } catch (err) {
     error.value = err.message || 'Failed to authenticate, try later.'
