@@ -11,8 +11,12 @@ import { createPinia } from 'pinia'
 import { createApp } from 'vue'
 import store from './store/index'
 
-loadFonts()
+// Components
+import BaseButton from './components/ui/BaseButton.vue'
+import BaseDialog from './components/ui/BaseDialog.vue'
+import BaseSpinner from './components/ui/BaseSpinner.vue'
 
+loadFonts()
 
 // Create vue app
 const app = createApp(App)
@@ -23,6 +27,11 @@ app.use(vuetify)
 app.use(createPinia())
 app.use(router)
 app.use(store)
+
+// Components
+app.component('BaseButton', BaseButton)
+app.component('BaseSpinner', BaseSpinner)
+app.component('BaseDialog', BaseDialog)
 
 // Mount vue app
 app.mount('#app')
