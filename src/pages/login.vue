@@ -6,13 +6,19 @@ import authV1MaskLight from '@images/pages/auth-v1-mask-light.png'
 import authV1Tree2 from '@images/pages/auth-v1-tree-2.png'
 import authV1Tree from '@images/pages/auth-v1-tree.png'
 import { useTheme } from 'vuetify'
+import { useStore } from 'vuex'
 
 const form = ref({
   email: '',
-  phoneNumber: '',
-  password: '',
+  phoneNumber: '+855962424486',
+  password: '1234',
   remember: false,
 })
+
+const isLoading = ref(false)
+const error = ref(null)
+
+const store = useStore()
 
 const vuetifyTheme = useTheme()
 
@@ -21,10 +27,46 @@ const authThemeMask = computed(() => {
 })
 
 const isPasswordVisible = ref(false)
+
+const actionPayload = {
+  phone: form.value.phoneNumber,
+  password: form.value.password,
+}
+
+const submitForm = async function () {
+  try {
+    isLoading.value = true
+
+    await store.dispatch('login', actionPayload)
+    
+  } catch (err) {
+    error.value = err.message || 'Failed to authenticate, try later.'
+  }
+
+  isLoading.value = false
+}
+
+const handleError = function () {
+  error.value = null
+}
 </script>
 
 <template>
   <div class="auth-wrapper d-flex align-center justify-center pa-4">
+    <BaseDialog
+      :show="!!error"
+      title="An error occurred"
+      @close="handleError"
+    >
+      <p>{{ error }}</p>
+    </BaseDialog>
+    <BaseDialog
+      :show="isLoading"
+      title="Authenticating..."
+      fixed
+    >
+      <BaseSpinner />
+    </BaseDialog>
     <VCard
       class="auth-card pa-4 pt-7"
       max-width="448"
@@ -51,9 +93,8 @@ const isPasswordVisible = ref(false)
       </VCardText>
 
       <VCardText>
-        <VForm @submit.prevent="() => {}">
+        <VForm @submit.prevent="submitForm">
           <VRow>
-            <!-- email -->
             <VCol cols="12">
               <VTextField
                 v-model="form.phoneNumber"
@@ -91,7 +132,6 @@ const isPasswordVisible = ref(false)
               <VBtn
                 block
                 type="submit"
-                to="/"
               >
                 Login
               </VBtn>
