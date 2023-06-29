@@ -2,7 +2,9 @@ let timer
 
 export default {
   async login(context, payload) {
-    const response = await fetch(`https://staging-02.z1platform.com/api/v2/signin-or-signup`, {
+    const apiEndPoint = import.meta.env.VITE_API_ENDPOINT
+
+    const response = await fetch(`${apiEndPoint}/api/v2/signin-or-signup`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
