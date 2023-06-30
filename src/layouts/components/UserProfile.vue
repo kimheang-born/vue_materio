@@ -13,11 +13,7 @@ const userProfile = computed(() => {
 })
 
 const imgProfile = computed(() => {
-  if (userProfile.value.profile && userProfile.value.profile.small) {
-    return userProfile.value.profile.small
-  }
-  
-  return avatar1
+  return userProfile.value?.profile?.small ?? avatar1
 })
 
 const loadUserProfile = async () => {
