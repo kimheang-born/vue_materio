@@ -26,9 +26,8 @@ const loadUserProfile = async () => {
   isLoading.value = false
 }
 
-const handleError = function () {
-  error.value = null
-}
+const handleError = () => error.value = null
+
 
 onBeforeMount(() => {
   loadUserProfile()
