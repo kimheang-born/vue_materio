@@ -37,7 +37,7 @@
   position: absolute;
   display: block;
   border-radius: 50%;
-  background: #3d008d;
+  background-color: rgb(var(--v-theme-primary)) !important;
   block-size: 7px;
   content: " ";
   inline-size: 7px;
