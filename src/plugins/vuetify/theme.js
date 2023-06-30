@@ -54,7 +54,7 @@ const theme = {
     dark: {
       dark: true,
       colors: {
-        'primary': '#9155FD',
+        'primary': '#12B8E2',
         'secondary': '#8A8D93',
         'on-secondary': '#fff',
         'success': '#56CA00',
@@ -65,7 +65,7 @@ const theme = {
         'on-success': '#FFFFFF',
         'on-warning': '#FFFFFF',
         'background': '#28243D',
-        'on-background': '#E7E3FC',
+        'on-background': '#12B8E2',
         'surface': '#312D4B',
         'on-surface': '#E7E3FC',
         'grey-50': '#2A2E42',
