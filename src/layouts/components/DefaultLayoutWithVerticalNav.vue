@@ -7,7 +7,6 @@ import VerticalNavLink from '@layouts/components/VerticalNavLink.vue'
 import { useTheme } from 'vuetify'
 
 // Components
-import Footer from '@/layouts/components/Footer.vue'
 import NavbarThemeSwitcher from '@/layouts/components/NavbarThemeSwitcher.vue'
 import UserProfile from '@/layouts/components/UserProfile.vue'
 
@@ -159,9 +158,7 @@ const upgradeBanner = computed(() => {
     <slot />
 
     <!-- 👉 Footer -->
-    <template #footer>
-      <Footer />
-    </template>
+    <template #footer />
   </VerticalNavLayout>
 </template>
 
