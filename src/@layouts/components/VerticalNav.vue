@@ -1,5 +1,4 @@
 <script setup>
-import logo from '@images/logo.svg?raw'
 import { PerfectScrollbar } from 'vue3-perfect-scrollbar'
 import { useDisplay } from 'vuetify'
 
@@ -58,13 +57,10 @@ const handleNavScroll = evt => {
           to="/"
           class="app-logo d-flex align-center gap-x-3 app-title-wrapper"
         >
-          <div
-            class="d-flex"
-            v-html="logo"
-          />
+          <Z1Logo />
 
-          <h1 class="font-weight-medium leading-normal text-xl text-uppercase">
-            Materio
+          <h1 class="font-weight-medium leading-normal text-xl text-capitalize">
+            Z1 App
           </h1>
         </RouterLink>
       </slot>

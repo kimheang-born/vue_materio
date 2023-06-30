@@ -12,6 +12,7 @@ import { createApp } from 'vue'
 import store from './store/index'
 
 // Components
+import Z1Logo from './components/logos/Z1Logo.vue'
 import BaseButton from './components/ui/BaseButton.vue'
 import BaseDialog from './components/ui/BaseDialog.vue'
 import BaseSpinner from './components/ui/BaseSpinner.vue'
@@ -32,6 +33,7 @@ app.use(store)
 app.component('BaseButton', BaseButton)
 app.component('BaseSpinner', BaseSpinner)
 app.component('BaseDialog', BaseDialog)
+app.component('Z1Logo', Z1Logo)
 
 // Mount vue app
 app.mount('#app')
