@@ -1,6 +1,13 @@
 <script setup>
 import avatar1 from '@images/avatars/avatar-1.png'
 
+import { onBeforeMount } from 'vue'
+import { useStore } from 'vuex'
+
+const store = useStore()
+const isLoading = ref(false)
+const error = ref(null)
+
 const accountData = {
   avatarImg: avatar1,
   firstName: 'john',
@@ -98,10 +105,45 @@ const currencies = [
   'HUF',
   'INR',
 ]
+
+const user = store.getters.getUserProfile
+
+const imgProfile = computed(() => {
+  return user?.profile?.small ?? avatar1
+})
+
+const loadUserProfile = async () => {
+  isLoading.value = true
+  try {
+    await store.dispatch('fetchUserProfile')
+  } catch (err) {
+    error.value = err.message || 'Something went wrong'
+  }
+  isLoading.value = false
+}
+
+const handleError = () => error.value = null
+
+onBeforeMount(() => {
+  loadUserProfile()
+})
 </script>
 
 <template>
   <VRow>
+    <BaseDialog
+      :show="!!error"
+      title="An error occurred"
+      @close="handleError"
+    >
+      <p>{{ error }}</p>
+    </BaseDialog>
+    <VCol
+      v-if="isLoading"
+      cols="12"
+    >
+      <BaseSpinner />
+    </VCol>
     <VCol cols="12">
       <VCard title="Account Details">
         <VCardText class="d-flex">
@@ -110,7 +152,7 @@ const currencies = [
             rounded="lg"
             size="100"
             class="me-6"
-            :image="accountDataLocal.avatarImg"
+            :image="imgProfile"
           />
 
           <!-- 👉 Upload Photo -->
@@ -168,7 +210,7 @@ const currencies = [
                 cols="12"
               >
                 <VTextField
-                  v-model="accountDataLocal.firstName"
+                  v-model="user.firstName"
                   label="First Name"
                 />
               </VCol>
@@ -179,7 +221,7 @@ const currencies = [
                 cols="12"
               >
                 <VTextField
-                  v-model="accountDataLocal.lastName"
+                  v-model="user.lastName"
                   label="Last Name"
                 />
               </VCol>
@@ -190,22 +232,24 @@ const currencies = [
                 md="6"
               >
                 <VTextField
-                  v-model="accountDataLocal.email"
+                  v-model="user.email"
                   label="E-mail"
                   type="email"
                 />
               </VCol>
 
               <!-- 👉 Organization -->
-              <VCol
+              <!--
+                <VCol
                 cols="12"
                 md="6"
-              >
+                >
                 <VTextField
-                  v-model="accountDataLocal.org"
-                  label="Organization"
+                v-model="accountDataLocal.org"
+                label="Organization"
                 />
-              </VCol>
+                </VCol> 
+              -->
 
               <!-- 👉 Phone -->
               <VCol
@@ -213,93 +257,107 @@ const currencies = [
                 md="6"
               >
                 <VTextField
-                  v-model="accountDataLocal.phone"
+                  v-model="user.phone"
                   label="Phone Number"
                 />
               </VCol>
 
               <!-- 👉 Address -->
-              <VCol
+              <!--
+                <VCol
                 cols="12"
                 md="6"
-              >
+                >
                 <VTextField
-                  v-model="accountDataLocal.address"
-                  label="Address"
+                v-model="accountDataLocal.address"
+                label="Address"
                 />
-              </VCol>
+                </VCol> 
+              -->
 
               <!-- 👉 State -->
-              <VCol
+              <!--
+                <VCol
                 cols="12"
                 md="6"
-              >
+                >
                 <VTextField
-                  v-model="accountDataLocal.state"
-                  label="State"
+                v-model="accountDataLocal.state"
+                label="State"
                 />
-              </VCol>
+                </VCol> 
+              -->
 
               <!-- 👉 Zip Code -->
-              <VCol
+              <!--
+                <VCol
                 cols="12"
                 md="6"
-              >
+                >
                 <VTextField
-                  v-model="accountDataLocal.zip"
-                  label="Zip Code"
+                v-model="accountDataLocal.zip"
+                label="Zip Code"
                 />
-              </VCol>
+                </VCol> 
+              -->
 
               <!-- 👉 Country -->
-              <VCol
+              <!--
+                <VCol
                 cols="12"
                 md="6"
-              >
+                >
                 <VSelect
-                  v-model="accountDataLocal.country"
-                  label="Country"
-                  :items="['USA', 'Canada', 'UK', 'India', 'Australia']"
+                v-model="accountDataLocal.country"
+                label="Country"
+                :items="['USA', 'Canada', 'UK', 'India', 'Australia']"
                 />
-              </VCol>
+                </VCol> 
+              -->
 
               <!-- 👉 Language -->
-              <VCol
+              <!--
+                <VCol
                 cols="12"
                 md="6"
-              >
+                >
                 <VSelect
-                  v-model="accountDataLocal.language"
-                  label="Language"
-                  :items="['English', 'Spanish', 'Arabic', 'Hindi', 'Urdu']"
+                v-model="accountDataLocal.language"
+                label="Language"
+                :items="['English', 'Spanish', 'Arabic', 'Hindi', 'Urdu']"
                 />
-              </VCol>
+                </VCol> 
+              -->
 
               <!-- 👉 Timezone -->
-              <VCol
+              <!--
+                <VCol
                 cols="12"
                 md="6"
-              >
+                >
                 <VSelect
-                  v-model="accountDataLocal.timezone"
-                  label="Timezone"
-                  :items="timezones"
-                  :menu-props="{ maxHeight: 200 }"
+                v-model="accountDataLocal.timezone"
+                label="Timezone"
+                :items="timezones"
+                :menu-props="{ maxHeight: 200 }"
                 />
-              </VCol>
+                </VCol> 
+              -->
 
               <!-- 👉 Currency -->
-              <VCol
+              <!--
+                <VCol
                 cols="12"
                 md="6"
-              >
+                >
                 <VSelect
-                  v-model="accountDataLocal.currency"
-                  label="Currency"
-                  :items="currencies"
-                  :menu-props="{ maxHeight: 200 }"
+                v-model="accountDataLocal.currency"
+                label="Currency"
+                :items="currencies"
+                :menu-props="{ maxHeight: 200 }"
                 />
-              </VCol>
+                </VCol> 
+              -->
 
               <!-- 👉 Form Actions -->
               <VCol
@@ -323,26 +381,27 @@ const currencies = [
       </VCard>
     </VCol>
 
-    <VCol cols="12">
-      <!-- 👉 Deactivate Account -->
+    <!--
+      <VCol cols="12">
       <VCard title="Deactivate Account">
-        <VCardText>
-          <div>
-            <VCheckbox
-              v-model="isAccountDeactivated"
-              label="I confirm my account deactivation"
-            />
-          </div>
+      <VCardText>
+      <div>
+      <VCheckbox
+      v-model="isAccountDeactivated"
+      label="I confirm my account deactivation"
+      />
+      </div>
 
-          <VBtn
-            :disabled="!isAccountDeactivated"
-            color="error"
-            class="mt-3"
-          >
-            Deactivate Account
-          </VBtn>
-        </VCardText>
+      <VBtn
+      :disabled="!isAccountDeactivated"
+      color="error"
+      class="mt-3"
+      >
+      Deactivate Account
+      </VBtn>
+      </VCardText>
       </VCard>
-    </VCol>
+      </VCol> 
+    -->
   </VRow>
 </template>
