@@ -138,11 +138,12 @@ onBeforeMount(() => {
     >
       <p>{{ error }}</p>
     </BaseDialog>
-    <VCol
-      v-if="isLoading"
-      cols="12"
-    >
-      <BaseSpinner />
+    <VCol cols="12">
+      <VProgressLinear
+        v-if="isLoading"
+        indeterminate
+        color="primary"
+      />
     </VCol>
     <VCol cols="12">
       <VCard title="Account Details">
