@@ -40,9 +40,9 @@ export default {
 button,
 a {
   display: inline-block;
-  border: 1px solid #3a0061;
+  border: 1px solid rgb(var(--v-theme-primary));
   border-radius: 30px;
-  background-color: #3a0061;
+  background-color: rgb(var(--v-theme-primary));
   color: white;
   cursor: pointer;
   font: inherit;
@@ -56,20 +56,20 @@ a:hover,
 a:active,
 button:hover,
 button:active {
-  border-color: #270041;
-  background-color: #270041;
+  border-color: rgb(var(--v-theme-primary));
+  background-color: rgb(var(--v-theme-primary));
 }
 
 .flat {
   border: none;
   background-color: transparent;
-  color: #3a0061;
+  color: rgb(var(--v-theme-primary));
 }
 
 .outline {
-  border-color: #270041;
+  border-color: rgb(var(--v-theme-primary));
   background-color: transparent;
-  color: #270041;
+  color: rgb(var(--v-theme-primary));
 }
 
 .flat:hover,
