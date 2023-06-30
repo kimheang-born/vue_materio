@@ -36,8 +36,9 @@ const actionPayload = {
 }
 
 const submitForm = async function () {
+  isLoading.value = true
+  
   try {
-    isLoading.value = true
 
     await store.dispatch('login', actionPayload)
 
