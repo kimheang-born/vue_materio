@@ -1,5 +1,44 @@
 <script setup>
 import avatar1 from '@images/avatars/avatar-1.png'
+
+import { computed, onBeforeMount } from 'vue'
+import { useStore } from 'vuex'
+
+const store = useStore()
+const isLoading = ref(false)
+const error = ref(null)
+
+const userProfile = computed(() => {
+  return store.getters.getUserProfile
+})
+
+const imgProfile = computed(() => {
+  if (userProfile.value.profile && userProfile.value.profile.small) {
+    return userProfile.value.profile.small
+  }
+  
+  return avatar1
+})
+
+const loadUserProfile = async () => {
+  isLoading.value = true
+  try {
+    await store.dispatch('fetchUserProfile')
+  } catch (err) {
+    error.value = err.message || 'Something went wrong'
+  }
+  isLoading.value = false
+}
+
+const handleError = function () {
+  error.value = null
+}
+
+onBeforeMount(() => {
+  loadUserProfile()
+})
+
+console.log(store.getters.getUserProfile)
 </script>
 
 <template>
@@ -16,7 +55,7 @@ import avatar1 from '@images/avatars/avatar-1.png'
       color="primary"
       variant="tonal"
     >
-      <VImg :src="avatar1" />
+      <VImg :src="imgProfile" />
 
       <!-- SECTION Menu -->
       <VMenu
@@ -41,14 +80,14 @@ import avatar1 from '@images/avatars/avatar-1.png'
                     color="primary"
                     variant="tonal"
                   >
-                    <VImg :src="avatar1" />
+                    <VImg :src="imgProfile" />
                   </VAvatar>
                 </VBadge>
               </VListItemAction>
             </template>
 
             <VListItemTitle class="font-weight-semibold">
-              John Doe
+              {{ userProfile.fullName }}
             </VListItemTitle>
             <VListItemSubtitle>Admin</VListItemSubtitle>
           </VListItem>

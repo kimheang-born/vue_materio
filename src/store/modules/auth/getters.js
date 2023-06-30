@@ -11,4 +11,7 @@ export default {
   didAutoLogout(state) {
     return state.didAutoLogout
   },
+  getUserProfile(state) {
+    return state.user
+  },
 }

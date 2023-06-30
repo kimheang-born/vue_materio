@@ -7,4 +7,7 @@ export default {
   setAutoLogout(state) {
     state.didAutoLogout = true
   },
+  setUserProfile(state, payload) {
+    state.user = payload
+  },
 }

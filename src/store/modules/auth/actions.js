@@ -1,9 +1,8 @@
 let timer
+const apiEndPoint = import.meta.env.VITE_API_ENDPOINT
 
 export default {
   async login(context, payload) {
-    const apiEndPoint = import.meta.env.VITE_API_ENDPOINT
-
     const response = await fetch(`${apiEndPoint}/api/v2/signin-or-signup`, {
       method: 'POST',
       headers: {
@@ -77,5 +76,31 @@ export default {
   autoLogout(context) {
     context.dispatch('logout')
     context.commit('setAutoLogout')
+  },
+  async fetchUserProfile(context) {
+    const token = context.getters.token
+
+    const response = await fetch(`${apiEndPoint}/api/v2/user`, {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    })
+
+    const responseData = await response.json()
+
+    if (!response.ok) {
+      throw new Error(
+        responseData.message || 'Failed to fetch data.',
+      )
+    }
+
+    context.commit('setUserProfile', {
+      id: responseData.id,
+      fullName: responseData.full_name,
+      company: responseData.company,
+      profile: responseData.profile,
+    })
   },
 }
