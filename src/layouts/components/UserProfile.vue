@@ -28,6 +28,7 @@ const loadUserProfile = async () => {
 
 const handleError = () => error.value = null
 
+const logout = () => store.dispatch('logout')
 
 onBeforeMount(() => {
   loadUserProfile()
@@ -142,7 +143,7 @@ onBeforeMount(() => {
           <VDivider class="my-2" />
 
           <!-- 👉 Logout -->
-          <VListItem to="/login">
+          <VListItem @click="logout">
             <template #prepend>
               <VIcon
                 class="me-2"
