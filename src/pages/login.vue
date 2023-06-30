@@ -2,8 +2,6 @@
 import AuthProvider from '@/views/pages/authentication/AuthProvider.vue'
 import authV1MaskDark from '@images/pages/auth-v1-mask-dark.png'
 import authV1MaskLight from '@images/pages/auth-v1-mask-light.png'
-import authV1Tree2 from '@images/pages/auth-v1-tree-2.png'
-import authV1Tree from '@images/pages/auth-v1-tree.png'
 import { useRouter } from 'vue-router'
 import { useTheme } from 'vuetify'
 import { useStore } from 'vuex'
@@ -142,18 +140,20 @@ const handleError = function () {
             </VCol>
 
             <!-- create account -->
-            <VCol
+            <!--
+              <VCol
               cols="12"
               class="text-center text-base"
-            >
+              >
               <span>New on our platform?</span>
               <RouterLink
-                class="text-primary ms-2"
-                to="/register"
+              class="text-primary ms-2"
+              to="/register"
               >
-                Create an account
+              Create an account
               </RouterLink>
-            </VCol>
+              </VCol> 
+            -->
 
             <VCol
               cols="12"
@@ -176,17 +176,21 @@ const handleError = function () {
       </VCardText>
     </VCard>
 
-    <VImg
+    <!--
+      <VImg
       class="auth-footer-start-tree d-none d-md-block"
       :src="authV1Tree"
       :width="250"
-    />
+      /> 
+    -->
 
-    <VImg
+    <!--
+      <VImg
       :src="authV1Tree2"
       class="auth-footer-end-tree d-none d-md-block"
       :width="350"
-    />
+      /> 
+    -->
 
     <!-- bg img -->
     <VImg
