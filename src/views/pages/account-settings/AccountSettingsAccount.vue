@@ -1,12 +1,34 @@
 <script setup>
 import avatar1 from '@images/avatars/avatar-1.png'
-
-import { onBeforeMount } from 'vue'
 import { useStore } from 'vuex'
 
 const store = useStore()
 const isLoading = ref(false)
 const error = ref(null)
+
+const user = computed(() => {
+  return store.getters.getUserProfile
+})
+
+const imgProfile = computed(() => {
+  return user.value?.profile?.medium ?? avatar1
+})
+
+const loadUserProfile = async () => {
+  isLoading.value = true
+  try {
+    await store.dispatch('fetchUserProfile')
+  } catch (err) {
+    error.value = err.message || 'Something went wrong'
+  }
+  isLoading.value = false
+}
+
+const handleError = () => error.value = null
+
+onBeforeMount(() => {
+  loadUserProfile()
+})
 
 const accountData = {
   avatarImg: avatar1,
@@ -105,28 +127,6 @@ const currencies = [
   'HUF',
   'INR',
 ]
-
-const user = store.getters.getUserProfile
-
-const imgProfile = computed(() => {
-  return user?.profile?.small ?? avatar1
-})
-
-const loadUserProfile = async () => {
-  isLoading.value = true
-  try {
-    await store.dispatch('fetchUserProfile')
-  } catch (err) {
-    error.value = err.message || 'Something went wrong'
-  }
-  isLoading.value = false
-}
-
-const handleError = () => error.value = null
-
-onBeforeMount(() => {
-  loadUserProfile()
-})
 </script>
 
 <template>
