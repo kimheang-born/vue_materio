@@ -37,8 +37,6 @@ const handleError = function () {
 onBeforeMount(() => {
   loadUserProfile()
 })
-
-console.log(store.getters.getUserProfile)
 </script>
 
 <template>
