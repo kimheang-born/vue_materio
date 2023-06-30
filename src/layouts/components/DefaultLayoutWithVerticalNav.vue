@@ -98,13 +98,6 @@ const upgradeBanner = computed(() => {
       />
       <VerticalNavLink
         :item="{
-          title: 'Register',
-          icon: 'mdi-account-plus-outline',
-          to: '/register',
-        }"
-      />
-      <VerticalNavLink
-        :item="{
           title: 'Error',
           icon: 'mdi-information-outline',
           to: '/no-existence',
