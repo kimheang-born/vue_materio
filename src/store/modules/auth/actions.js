@@ -99,6 +99,10 @@ export default {
     context.commit('setUserProfile', {
       id: responseData.id,
       fullName: responseData.full_name,
+      firstName: responseData.first_name,
+      lastName: responseData.last_name,
+      email: responseData.email,
+      phone: responseData.phone,
       company: responseData.company,
       profile: responseData.profile,
     })

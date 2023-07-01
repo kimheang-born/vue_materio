@@ -19,12 +19,20 @@ const loadUserProfile = async () => {
   try {
     await store.dispatch('fetchUserProfile')
   } catch (err) {
-    error.value = err.message || 'Something went wrong'
+    error.value = err.message || 'Something went wrong when fetching data'
   }
   isLoading.value = false
 }
 
 const handleError = () => error.value = null
+
+const saveAccount = async () => {
+  try {
+    await store.dispatch('accSetting/saveAccount')
+  } catch (err) {
+    error.value = err.message || 'Something went wrong when saving data'
+  }
+}
 
 onBeforeMount(() => {
   loadUserProfile()

@@ -3,20 +3,14 @@ import getters from './getters'
 import mutations from './mutations'
 
 export default {
+  namespaced: true,
   state() {
     return {
-      userId: null,
-      token: null,
-      didAutoLogout: false,
-      user: {
-        id: null,
-        fullName: null,
+      account: {
         firstName: null,
         lastName: null,
         email: null,
         phone: null,
-        company: null,
-        profile: null,
       },
     }
   },
