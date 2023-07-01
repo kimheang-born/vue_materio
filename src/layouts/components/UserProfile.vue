@@ -143,7 +143,10 @@ onBeforeMount(() => {
           <VDivider class="my-2" />
 
           <!-- 👉 Logout -->
-          <VListItem @click="logout">
+          <VListItem
+            to="/login"
+            @click="logout"
+          >
             <template #prepend>
               <VIcon
                 class="me-2"
