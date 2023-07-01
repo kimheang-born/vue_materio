@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "tsc && vite build",
     "preview": "vite preview --port 5050",
     "lint": "eslint . -c .eslintrc.js --fix --ext .ts,.js,.vue,.tsx,.jsx",
     "build:icons": "node src/@iconify/build-icons.js",
@@ -66,6 +66,7 @@
     "stylelint-config-idiomatic-order": "9.0.0",
     "stylelint-config-standard-scss": "6.1.0",
     "stylelint-use-logical-spec": "4.1.0",
+    "typescript": "^5.1.6",
     "unplugin-auto-import": "^0.15.1",
     "unplugin-vue-components": "^0.24.1",
     "vite": "^4.3.5",
