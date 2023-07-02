@@ -13,6 +13,23 @@ const form = ref({
   remember: false,
 })
 
+// Validate
+const phoneNumberRules = ref([
+  value => {
+    if (value) return true
+
+    return 'Phone number is required.'
+  },
+])
+
+const passwordRules = ref([
+  value => {
+    if (value) return true
+
+    return 'Password is required.'
+  },
+])
+
 const isLoading = ref(false)
 const error = ref(null)
 
@@ -58,13 +75,6 @@ const handleError = function () {
 
 <template>
   <div class="auth-wrapper d-flex align-center justify-center pa-4">
-    <BaseDialog
-      :show="!!error"
-      title="An error occurred"
-      @close="handleError"
-    >
-      <p>{{ error }}</p>
-    </BaseDialog>
     <VCard
       class="auth-card pa-4 pt-7"
       max-width="448"
@@ -93,6 +103,7 @@ const handleError = function () {
               <VTextField
                 v-model="form.phoneNumber"
                 label="Phone Number"
+                :rules="phoneNumberRules"
                 type="text"
               />
             </VCol>
@@ -103,6 +114,7 @@ const handleError = function () {
                 v-model="form.password"
                 label="Password"
                 :type="isPasswordVisible ? 'text' : 'password'"
+                :rules="passwordRules"
                 :append-inner-icon="isPasswordVisible ? 'mdi-eye-off-outline' : 'mdi-eye-outline'"
                 @click:append-inner="isPasswordVisible = !isPasswordVisible"
               />
