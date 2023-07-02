@@ -8,8 +8,8 @@ import { useStore } from 'vuex'
 
 const form = ref({
   email: '',
-  phoneNumber: '+855962424486',
-  password: '1234',
+  phoneNumber: '',
+  password: '',
   remember: false,
 })
 
@@ -34,10 +34,13 @@ const actionPayload = {
 
 const submitForm = async function () {
   isLoading.value = true
-  
+
   try {
 
-    await store.dispatch('login', actionPayload)
+    await store.dispatch('login', {
+      phone: form.value.phoneNumber,
+      password: form.value.password,
+    })
 
     router.push({ name: 'dashboard' })
     
