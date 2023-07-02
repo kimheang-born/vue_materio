@@ -107,4 +107,39 @@ export default {
       profile: responseData.profile,
     })
   },
+  async saveAccount(context, payload) {
+    const token = context.getters.token
+
+    const response = await fetch(`${apiEndPoint}/api/v2/user`, {
+      method: 'PUT',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        first_name: payload.firstName,
+        last_name: payload.lastName,
+      }),
+    })
+
+    const responseData = await response.json()
+
+    if (!response.ok) {
+      throw new Error(
+        responseData.message || 'Failed to update data.',
+      )
+    }
+
+    context.commit('setUserProfile', {
+      id: responseData.id,
+      fullName: responseData.full_name,
+      firstName: responseData.first_name,
+      lastName: responseData.last_name,
+      phone: responseData.phone,
+      email: responseData.email,
+      company: responseData.company,
+      profile: responseData.profile,
+    })
+  },
 }

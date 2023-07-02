@@ -16,15 +16,15 @@ const imgProfile = computed(() => {
 
 const loadUserProfile = async () => {
   isLoading.value = true
+
   try {
     await store.dispatch('fetchUserProfile')
   } catch (err) {
     error.value = err.message || 'Something went wrong'
   }
+
   isLoading.value = false
 }
-
-const handleError = () => error.value = null
 
 onBeforeMount(() => {
   loadUserProfile()
@@ -127,22 +127,83 @@ const currencies = [
   'HUF',
   'INR',
 ]
+
+const isReadOnly = ref(true)
+const isSaving = ref(false)
+const isSuccess = ref(false)
+const accountError = ref(null)
+
+const firstNameRules = ref([
+  value => {
+    if (value) return true
+
+    return 'First name is required.'
+  },
+])
+
+const lastNamedRules = ref([
+  value => {
+    if (value) return true
+
+    return 'Last name is required.'
+  },
+])
+
+const submitAccountForm = async () => {
+  isSaving.value = true
+  
+  try {
+    await store.dispatch('saveAccount', {
+      firstName: user.value.firstName,
+      lastName: user.value.lastName,
+    })
+    isSuccess.value = true
+  } catch (err) {
+    accountError.value = err.message || 'Internal error.'
+  }
+
+  isSaving.value = false
+}
+
+const handleError = () => { 
+  error.value = null 
+  accountError.value = null 
+}
 </script>
 
 <template>
   <VRow>
     <BaseDialog
-      :show="!!error"
+      :show="!!error || !!accountError"
       title="An error occurred"
       @close="handleError"
     >
-      <p>{{ error }}</p>
+      <p v-if="!!error">
+        {{ error }}
+      </p>
+      <p v-if="!!accountError">
+        {{ accountError }}
+      </p>
     </BaseDialog>
     <VCol cols="12">
       <VProgressLinear
         v-if="isLoading"
         indeterminate
         color="primary"
+      />
+    </VCol>
+    <VCol
+      v-if="isSuccess && !isSaving"
+      md="12"
+      cols="12"
+    >
+      <VAlert
+        type="success"
+        title="Congratulations"
+        text="Your changes have been successfully saved!"
+        icon="mdi-check-circle"
+        border="start"
+        variant="tonal"
       />
     </VCol>
     <VCol cols="12">
@@ -161,6 +222,7 @@ const currencies = [
             <div class="d-flex flex-wrap gap-2">
               <VBtn
                 color="primary"
+                :disabled="isSaving"
                 @click="refInputEl?.click()"
               >
                 <VIcon
@@ -183,6 +245,7 @@ const currencies = [
                 type="reset"
                 color="error"
                 variant="tonal"
+                :disabled="isSaving"
                 @click="resetAvatar"
               >
                 <span class="d-none d-sm-block">Reset</span>
@@ -203,7 +266,10 @@ const currencies = [
 
         <VCardText>
           <!-- 👉 Form -->
-          <VForm class="mt-6">
+          <VForm
+            class="mt-6"
+            @submit.prevent="submitAccountForm"
+          >
             <VRow>
               <!-- 👉 First Name -->
               <VCol
@@ -212,6 +278,7 @@ const currencies = [
               >
                 <VTextField
                   v-model="user.firstName"
+                  :rules="firstNameRules"
                   label="First Name"
                 />
               </VCol>
@@ -223,6 +290,7 @@ const currencies = [
               >
                 <VTextField
                   v-model="user.lastName"
+                  :rules="lastNamedRules"
                   label="Last Name"
                 />
               </VCol>
@@ -259,6 +327,7 @@ const currencies = [
               >
                 <VTextField
                   v-model="user.phone"
+                  :readonly="isReadOnly"
                   label="Phone Number"
                 />
               </VCol>
@@ -365,12 +434,27 @@ const currencies = [
                 cols="12"
                 class="d-flex flex-wrap gap-4"
               >
-                <VBtn>Save changes</VBtn>
+                <VBtn
+                  :disabled="isSaving"
+                  type="submit"
+                >
+                  <template v-if="isSaving">
+                    <VProgressCircular
+                      indeterminate
+                      color="white"
+                    />
+                  </template>
+                  <template v-else>
+                    Save changes
+                  </template>
+                </VBtn>
 
+                
                 <VBtn
                   color="secondary"
                   variant="tonal"
                   type="reset"
+                  :disabled="isSaving"
                   @click.prevent="resetForm"
                 >
                   Reset
