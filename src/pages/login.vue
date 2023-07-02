@@ -65,13 +65,6 @@ const handleError = function () {
     >
       <p>{{ error }}</p>
     </BaseDialog>
-    <BaseDialog
-      :show="isLoading"
-      title="Authenticating..."
-      fixed
-    >
-      <BaseSpinner />
-    </BaseDialog>
     <VCard
       class="auth-card pa-4 pt-7"
       max-width="448"
@@ -132,9 +125,18 @@ const handleError = function () {
               <!-- login button -->
               <VBtn
                 block
+                :disabled="isLoading"
                 type="submit"
               >
-                Login
+                <template v-if="isLoading">
+                  <VProgressCircular
+                    indeterminate
+                    color="white"
+                  />
+                </template>
+                <template v-else>
+                  Login
+                </template>
               </VBtn>
             </VCol>
 
