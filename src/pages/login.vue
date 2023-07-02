@@ -139,22 +139,6 @@ const handleError = function () {
               </VBtn>
             </VCol>
 
-            <!-- create account -->
-            <!--
-              <VCol
-              cols="12"
-              class="text-center text-base"
-              >
-              <span>New on our platform?</span>
-              <RouterLink
-              class="text-primary ms-2"
-              to="/register"
-              >
-              Create an account
-              </RouterLink>
-              </VCol> 
-            -->
-
             <VCol
               cols="12"
               class="d-flex align-center"
@@ -175,28 +159,6 @@ const handleError = function () {
         </VForm>
       </VCardText>
     </VCard>
-
-    <!--
-      <VImg
-      class="auth-footer-start-tree d-none d-md-block"
-      :src="authV1Tree"
-      :width="250"
-      /> 
-    -->
-
-    <!--
-      <VImg
-      :src="authV1Tree2"
-      class="auth-footer-end-tree d-none d-md-block"
-      :width="350"
-      /> 
-    -->
-
-    <!-- bg img -->
-    <VImg
-      class="auth-footer-mask d-none d-md-block"
-      :src="authThemeMask"
-    />
   </div>
 </template>
 
