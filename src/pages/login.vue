@@ -79,13 +79,9 @@ const handleError = function () {
       <VCardItem class="justify-center">
         <template #prepend>
           <div class="d-flex">
-            <Z1Logo />
+            <Z1LogoWithText />
           </div>
         </template>
-
-        <VCardTitle class="font-weight-semibold text-2xl text-capitalize">
-          Z1 App
-        </VCardTitle>
       </VCardItem>
 
       <VCardText class="pt-2">
