@@ -86,21 +86,14 @@ const upgradeBanner = computed(() => {
       <!-- 👉 Pages -->
       <VerticalNavSectionTitle
         :item="{
-          heading: 'Pages',
+          heading: 'Appraisals',
         }"
       />
       <VerticalNavLink
         :item="{
-          title: 'Login',
-          icon: 'mdi-login',
+          title: 'Indication Plus',
+          icon: 'mdi-finance',
           to: '/login',
-        }"
-      />
-      <VerticalNavLink
-        :item="{
-          title: 'Error',
-          icon: 'mdi-information-outline',
-          to: '/no-existence',
         }"
       />
 
