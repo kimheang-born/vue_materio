@@ -11,6 +11,10 @@ export default {
       user: {
         id: null,
         fullName: null,
+        firstName: null,
+        lastName: null,
+        phone: null,
+        email: null,
         company: null,
         profile: null,
       },
