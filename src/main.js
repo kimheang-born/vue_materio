@@ -13,6 +13,7 @@ import store from './store/index'
 
 // Components
 import Z1Logo from './components/logos/Z1Logo.vue'
+import Z1LogoWithText from './components/logos/Z1LogoWithText.vue'
 import BaseButton from './components/ui/BaseButton.vue'
 import BaseDialog from './components/ui/BaseDialog.vue'
 import BaseSpinner from './components/ui/BaseSpinner.vue'
@@ -34,6 +35,7 @@ app.component('BaseButton', BaseButton)
 app.component('BaseSpinner', BaseSpinner)
 app.component('BaseDialog', BaseDialog)
 app.component('Z1Logo', Z1Logo)
+app.component('Z1LogoWithText', Z1LogoWithText)
 
 // Mount vue app
 app.mount('#app')

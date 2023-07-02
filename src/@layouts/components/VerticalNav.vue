@@ -57,11 +57,7 @@ const handleNavScroll = evt => {
           to="/"
           class="app-logo d-flex align-center gap-x-3 app-title-wrapper"
         >
-          <Z1Logo />
-
-          <h1 class="font-weight-medium leading-normal text-xl text-capitalize">
-            Z1 App
-          </h1>
+          <Z1LogoWithText />
         </RouterLink>
       </slot>
     </div>
