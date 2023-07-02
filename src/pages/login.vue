@@ -44,11 +44,6 @@ const authThemeMask = computed(() => {
 
 const isPasswordVisible = ref(false)
 
-const actionPayload = {
-  phone: form.value.phoneNumber,
-  password: form.value.password,
-}
-
 const submitForm = async function () {
   isLoading.value = true
 
