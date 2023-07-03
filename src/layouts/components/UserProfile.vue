@@ -8,6 +8,10 @@ const store = useStore()
 const isLoading = ref(false)
 const error = ref(null)
 
+const onlineBadgeColor = computed(() => {
+  return store.getters['internets/isOnline'] ? 'success' : 'secondary'
+})
+
 const userProfile = computed(() => {
   return store.getters.getUserProfile
 })
@@ -41,7 +45,7 @@ onBeforeMount(() => {
     location="bottom right"
     offset-x="3"
     offset-y="3"
-    color="success"
+    :color="onlineBadgeColor"
     bordered
   >
     <VAvatar
@@ -68,7 +72,8 @@ onBeforeMount(() => {
                   location="bottom right"
                   offset-x="3"
                   offset-y="3"
-                  color="success"
+                  :color="onlineBadgeColor"
+                  bordered
                 >
                   <VAvatar
                     color="primary"
