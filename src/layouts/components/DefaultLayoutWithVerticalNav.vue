@@ -48,15 +48,6 @@ const upgradeBanner = computed(() => {
 
         <VSpacer />
 
-        <IconBtn
-          class="me-2"
-          href="https://github.com/themeselection/materio-vuetify-vuejs-admin-template-free"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <VIcon icon="mdi-github" />
-        </IconBtn>
-
         <IconBtn class="me-2">
           <VIcon icon="mdi-bell-outline" />
         </IconBtn>
