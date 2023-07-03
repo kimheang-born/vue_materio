@@ -1,5 +1,9 @@
 <script setup>
 import VueApexCharts from 'vue3-apexcharts'
+import { computed, onBeforeMount } from 'vue'
+import { useStore } from 'vuex'
+
+const store = useStore()
 
 const chartOptions = ref({
   labels: ['Land', 'Building', 'Land and Building'],
@@ -38,7 +42,26 @@ const chartOptions = ref({
   colors: ['#E68875', '#F0C3BA', '#F4D9D4'],
 })
 
-const chartSeries = ref([44, 55, 13])
+const error = ref(null)
+const isLoading = ref(false)
+
+const totalCases = computed(() => store.getters['dashboards/totalCases'])
+
+const loadTotalCases = function () {
+  isLoading.value = true
+
+  try {
+    store.dispatch('dashboards/fetchTotalCases')
+  } catch (err) {
+    error.message = err.message || 'Unable to retrieve the data'
+  }
+
+  isLoading.value = true
+}
+
+onBeforeMount(() => {
+  loadTotalCases()
+})
 </script>
 
 <template>
@@ -47,7 +70,7 @@ const chartSeries = ref([44, 55, 13])
       <VueApexCharts
         type="donut"
         :options="chartOptions"
-        :series="chartSeries"
+        :series="totalCases"
       />
     </VCardItem>
   </VCard>
