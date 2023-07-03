@@ -201,7 +201,6 @@ const handleError = () => {
         type="success"
         title="Congratulations"
         text="Your changes have been successfully saved!"
-        icon="mdi-check-circle"
         border="start"
         variant="tonal"
       />
