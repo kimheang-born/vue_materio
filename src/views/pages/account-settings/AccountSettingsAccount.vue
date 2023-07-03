@@ -295,17 +295,31 @@ const handleError = () => {
                 />
               </VCol>
 
-              <!-- 👉 Email -->
+              <!-- 👉 Phone -->
               <VCol
                 cols="12"
                 md="6"
               >
                 <VTextField
-                  v-model="user.email"
-                  label="E-mail"
-                  type="email"
+                  v-model="user.phone"
+                  :readonly="isReadOnly"
+                  label="Phone Number"
                 />
               </VCol>
+              
+              <!-- 👉 Email -->
+              <!--
+                <VCol
+                cols="12"
+                md="6"
+                >
+                <VTextField
+                v-model="user.email"
+                label="E-mail"
+                type="email"
+                />
+                </VCol> 
+              -->
 
               <!-- 👉 Organization -->
               <!--
@@ -319,18 +333,6 @@ const handleError = () => {
                 />
                 </VCol> 
               -->
-
-              <!-- 👉 Phone -->
-              <VCol
-                cols="12"
-                md="6"
-              >
-                <VTextField
-                  v-model="user.phone"
-                  :readonly="isReadOnly"
-                  label="Phone Number"
-                />
-              </VCol>
 
               <!-- 👉 Address -->
               <!--
