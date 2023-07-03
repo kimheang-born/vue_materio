@@ -1,5 +1,6 @@
 <script setup>
 import AnalyticsAward from '@/views/dashboard/AnalyticsAward.vue'
+import AnalyticsTotalSale from '@/views/dashboard/AnalyticsTotalSale.vue'
 import AnalyticsBarCharts from '@/views/dashboard/AnalyticsBarCharts.vue'
 import AnalyticsDepositWithdraw from '@/views/dashboard/AnalyticsDepositWithdraw.vue'
 import AnalyticsSalesByCountries from '@/views/dashboard/AnalyticsSalesByCountries.vue'
@@ -33,7 +34,13 @@ const newProject = {
   <VRow class="match-height">
     <VCol
       cols="12"
-      md="4"
+      md="6"
+    >
+      <AnalyticsTotalSale />
+    </VCol>
+    <VCol
+      cols="12"
+      md="6"
     >
       <AnalyticsAward />
     </VCol>
