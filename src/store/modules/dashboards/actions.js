@@ -1,16 +1,20 @@
 const apiEndPoint = import.meta.env.VITE_API_ENDPOINT
 
+const apiHeaders = token => {
+  return {
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+  }
+}
+
 export default {
   async fetchTotalCases(context) {
     const token = context.rootGetters.token
 
-    const response = await fetch(`${apiEndPoint}/api/v2/indication-plus/case-by-record-type`, {
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-    })
+    const response = await fetch(`${apiEndPoint}/api/v2/indication-plus/case-by-record-type`, apiHeaders(token))
 
     const responseData = await response.json()
 
