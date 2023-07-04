@@ -42,19 +42,17 @@ const newProject = {
       cols="12"
       md="6"
     >
-      <AnalyticsAward />
-    </VCol>
-
-    <VCol
-      cols="12"
-      md="8"
-    >
       <AnalyticsTransactions />
     </VCol>
-
     <VCol
       cols="12"
-      md="4"
+      md="6"
+    >
+      <AnalyticsAward />
+    </VCol>
+    <VCol
+      cols="12"
+      md="6"
     >
       <AnalyticsWeeklyOverview />
     </VCol>
