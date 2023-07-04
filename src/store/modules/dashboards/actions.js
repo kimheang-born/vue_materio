@@ -1,3 +1,5 @@
+import axios from "axios"
+
 const apiEndPoint = import.meta.env.VITE_API_ENDPOINT
 
 const apiHeaders = token => {
@@ -29,5 +31,21 @@ export default {
     const totalCases = data.slice(1).map(item => item.value)
 
     context.commit('setTotalCases', totalCases)
+  },
+  async fetchTotalStatuses(context) {
+    const token = context.rootGetters.token
+
+    const response = await axios.get(`${apiEndPoint}/api/v2/submit_cases/total_case`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+
+    if (response.status !== 200) {
+      throw new Error(`Request failed with status: ${response.status}`)
+    }
+
+    context.commit('setTotalStatuses', response?.data?.data)
+    context.commit('setAllTotalStatusesNum', response?.data?.meta?.total?.value)
   },
 }

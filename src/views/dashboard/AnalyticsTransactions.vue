@@ -1,4 +1,9 @@
 <script setup>
+import { computed, onBeforeMount } from 'vue'
+import { useStore } from 'vuex'
+
+const store = useStore()
+
 const statistics = [
   {
     title: 'Sales',
@@ -25,12 +30,35 @@ const statistics = [
     color: 'info',
   },
 ]
+
+const isLoading = ref(false)
+const error = ref(null)
+
+const allTotalStatusesNum = computed(() => store.getters['dashboards/allTotalStatusesNum'])
+
+const mappedStatuesStatistics = computed(() => store.getters['dashboards/mappedStatuesStatistics'])
+
+const loadTotalStatuses = async () => {
+  isLoading.value = true
+
+  try {
+    await store.dispatch('dashboards/fetchTotalStatuses')
+  } catch (err) {
+    error.value = err || 'Unable to retrieve the data'
+  }
+
+  isLoading.value = false
+}
+
+onBeforeMount(() => {
+  loadTotalStatuses()
+})
 </script>
 
 <template>
   <VCard>
     <VCardItem>
-      <VCardTitle>Transactions</VCardTitle>
+      <VCardTitle>Status ({{ allTotalStatusesNum }})</VCardTitle>
 
       <template #append>
         <div class="me-n3">
@@ -40,15 +68,10 @@ const statistics = [
     </VCardItem>
 
     <VCardText>
-      <h6 class="text-sm font-weight-medium mb-12">
-        <span>Total 48.5% Growth 😎</span>
-        <span class="font-weight-regular"> this month</span>
-      </h6>
-
       <VRow>
         <VCol
-          v-for="item in statistics"
-          :key="item.title"
+          v-for="item in mappedStatuesStatistics"
+          :key="item.status"
           cols="6"
           sm="3"
         >
@@ -68,10 +91,10 @@ const statistics = [
             </div>
 
             <div class="d-flex flex-column">
-              <span class="text-caption">
-                {{ item.title }}
+              <span class="text-caption text-no-wrap">
+                {{ item.text }}
               </span>
-              <span class="text-h6">{{ item.stats }}</span>
+              <span class="text-h6">{{ item.value }}</span>
             </div>
           </div>
         </VCol>

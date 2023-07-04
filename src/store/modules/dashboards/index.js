@@ -7,6 +7,8 @@ export default {
   state() {
     return {
       totalCases: [],
+      totalStatuses: [],
+      allTotalStatusesNum: 0,
     }
   },
   mutations,
