@@ -6,7 +6,7 @@ import AnalyticsDepositWithdraw from '@/views/dashboard/AnalyticsDepositWithdraw
 import AnalyticsSalesByCountries from '@/views/dashboard/AnalyticsSalesByCountries.vue'
 import AnalyticsTotalEarning from '@/views/dashboard/AnalyticsTotalEarning.vue'
 import AnalyticsTotalProfitLineCharts from '@/views/dashboard/AnalyticsTotalProfitLineCharts.vue'
-import AnalyticsTransactions from '@/views/dashboard/AnalyticsTransactions.vue'
+import AnalyticsAllCaseStatuses from '@/views/dashboard/AnalyticsAllCaseStatuses.vue'
 import AnalyticsUserTable from '@/views/dashboard/AnalyticsUserTable.vue'
 import AnalyticsWeeklyOverview from '@/views/dashboard/AnalyticsWeeklyOverview.vue'
 import CardStatisticsVertical from '@core/components/cards/CardStatisticsVertical.vue'
@@ -42,7 +42,7 @@ const newProject = {
       cols="12"
       md="6"
     >
-      <AnalyticsTransactions />
+      <AnalyticsAllCaseStatuses />
     </VCol>
     <VCol
       cols="12"
