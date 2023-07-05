@@ -1,76 +1,85 @@
 <script setup>
-const desserts = ref([
-  {
-    name: 'Frozen Yogurt',
-    calories: 159,
-  },
-  {
-    name: 'Ice cream sandwich',
-    calories: 237,
-  },
-  {
-    name: 'Eclair',
-    calories: 262,
-  },
-  {
-    name: 'Cupcake',
-    calories: 305,
-  },
-  {
-    name: 'Gingerbread',
-    calories: 356,
-  },
-  {
-    name: 'Jelly bean',
-    calories: 375,
-  },
-  {
-    name: 'Lollipop',
-    calories: 392,
-  },
-  {
-    name: 'Honeycomb',
-    calories: 408,
-  },
-  {
-    name: 'Donut',
-    calories: 452,
-  },
-  {
-    name: 'KitKat',
-    calories: 518,
-  },
-])
+import { onBeforeMount, computed } from 'vue'
+import { useStore } from 'vuex'
+
+const store = useStore()
+
+const page = ref(1)
+const isLoading = ref(false)
+const error = ref(null)
+
+const mappedCases = computed(() => store.getters['indicationPlus/mappedCases'])
+
+const loadCases = async () => {
+  isLoading.value = true
+
+  try {
+    await store.dispatch('indicationPlus/fetchCases')
+  } catch (err) {
+    error.value = err.message || 'The data could not be retrieved.'
+  }
+
+  isLoading.value = false
+}
+
+const headers = [
+  'Cases Number',
+  'Status',
+  'Property Type',
+  'Created At',
+]
+
+onBeforeMount(() => {
+  loadCases()
+})
 </script>
 
 <template>
   <VTable
+    :headers="headers"
     fixed-header
-    height="300px"
+    height="450px"
   >
     <thead>
       <tr>
         <th
-          id="name"
-          class="text-left"
+          v-for="header in headers"
+          id="cases"
+          :key="header"
+          class="text-left able-rounded"
+          hide-default-footer
+          disable-sort
         >
-          Name
-        </th>
-        <th
-          id="calories"
-          class="text-left"
-        >
-          Calories
+          {{ header }}
         </th>
       </tr>
     </thead>
     <tbody>
       <tr
-        v-for="item in desserts"
-        :key="item.name"
+        v-for="item in mappedCases"
+        :key="item.id"
       >
-        <td>{{ item.name }}</td>
-        <td>{{ item.calories }}</td>
+        <td
+          class="text-sm"
+          v-text="item.id"
+        />
+        <td>
+          <VChip
+            size="small"
+            :color="item.color"
+            class="text-capitalize"
+          >
+            {{ item.status }}
+          </VChip>
+        </td>
+        <td
+          class="text-sm"
+          v-text="item.propertyTypeDynamicName"
+        />
+        <td
+          class="text-sm"
+          v-text="$filters.timeAgo(item.createdAt)"
+        />
       </tr>
     </tbody>
   </VTable>
