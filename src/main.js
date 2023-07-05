@@ -7,6 +7,7 @@ import router from '@/router'
 import '@core/scss/template/index.scss'
 import '@layouts/styles/index.scss'
 import '@styles/styles.scss'
+import moment from 'moment'
 import { createPinia } from 'pinia'
 import { createApp } from 'vue'
 import store from './store/index'
@@ -23,6 +24,16 @@ loadFonts()
 // Create vue app
 const app = createApp(App)
 
+/**
+* @params {date} date to be converted to time ago
+* @returns returns timeAgo
+*/
+app.config.globalProperties.$filters = {
+  timeAgo(date) {
+    return moment(date).fromNow()
+  },
+}
+    
 
 // Use plugins
 app.use(vuetify)
