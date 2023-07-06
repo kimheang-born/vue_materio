@@ -1,78 +1,70 @@
 <script setup>
-const firstName = ref('')
-const email = ref('')
-const mobile = ref()
-const password = ref()
-const checkbox = ref(false)
+const recordType = ref('')
 </script>
 
 <template>
   <div>
     <VCol
       cols="12"
-      md="6"
+      md="12"
+      sm="6"
     >
-      <!-- 👉 Vertical Form -->
-      <VCard title="Vertical Form">
+      <VCard title="Create Case">
         <VCardText>
           <VForm @submit.prevent="() => {}">
             <VRow>
-              <VCol cols="12">
-                <VTextField
-                  v-model="firstName"
-                  label="First Name"
-                  placeholder="First Name"
+              <VCol cols="6">
+                <VSelect
+                  v-model="recordType"
+                  clearable
+                  label="Record Type *"
+                  :items="['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']"
+                  variant="outlined"
+                  :rules="[v => !!v || 'Record Type is required']"
                 />
               </VCol>
-
-              <VCol cols="12">
-                <VTextField
-                  v-model="email"
-                  label="Email"
-                  type="email"
-                  placeholder="Email"
+              <VCol cols="6">
+                <VSelect
+                  clearable
+                  label="Property Type"
+                  :items="['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']"
+                  variant="outlined"
                 />
               </VCol>
-
-              <VCol cols="12">
-                <VTextField
-                  v-model="mobile"
-                  label="Mobile"
-                  type="number"
-                  placeholder="Number"
+              <VCol cols="6">
+                <VSelect
+                  clearable
+                  label="Current Use"
+                  :items="['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']"
+                  variant="outlined"
                 />
               </VCol>
-
-              <VCol cols="12">
-                <VTextField
-                  v-model="password"
-                  label="Password"
-                  type="password"
-                  placeholder="password"
+              <VCol cols="6">
+                <VSelect
+                  clearable
+                  label="Purpose"
+                  :items="['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']"
+                  variant="outlined"
                 />
               </VCol>
-
-              <VCol cols="12">
-                <VCheckbox
-                  v-model="checkbox"
-                  label="Remember me"
-                />
-              </VCol>
-
-              <VCol
-                cols="12"
-                class="d-flex gap-4"
-              >
-                <VBtn type="submit">
-                  Submit
-                </VBtn>
-
+            </VRow>
+            <VRow justify="end">
+              <VCol cols="auto">
                 <VBtn
-                  type="reset"
                   color="secondary"
                   variant="tonal"
+                  class="text-capitalize"
+                  :to="{ name: 'case-list' }"
                 >
-                  Reset
+                  Cancel
+                </VBtn>
+              </VCol>
+              <VCol cols="auto">
+                <VBtn
+                  type="submit"
+                  class="text-capitalize"
+                >
+                  Submit
                 </VBtn>
               </VCol>
             </VRow>
