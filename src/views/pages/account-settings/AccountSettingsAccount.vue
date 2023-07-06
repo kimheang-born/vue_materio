@@ -26,7 +26,7 @@ const loadUserProfile = async () => {
   isLoading.value = false
 }
 
-onBeforeMount(() => {
+onMounted(() => {
   loadUserProfile()
 })
 
