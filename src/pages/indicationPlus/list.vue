@@ -111,7 +111,7 @@ const onClick = () => {
         >
           <VBtn
             color="primary"
-            @click="addUser"
+            :to="{ name: 'create-case' }"
           >
             Add User
           </VBtn>

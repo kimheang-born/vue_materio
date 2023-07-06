@@ -24,6 +24,11 @@ const router = createRouter({
           meta: { requiresAuth: true },
         },
         {
+          name: 'create-case',
+          path: 'case-list/create',
+          component: () => import('../pages/indicationPlus/create.vue'),
+        },
+        {
           path: 'account-settings',
           component: () => import('../pages/account-settings.vue'),
         },
