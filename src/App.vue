@@ -36,7 +36,7 @@ onBeforeUnmount(() => {
         left
         class="mr-2"
       >
-        mdi-wifi-off
+        mdi-wifi
       </VIcon>
       <VIcon
         v-else
