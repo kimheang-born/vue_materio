@@ -1,5 +1,5 @@
 <script setup>
-import { onBeforeMount, computed } from 'vue'
+import { computed, onMounted } from 'vue'
 import { useStore } from 'vuex'
 
 const store = useStore()
@@ -29,7 +29,7 @@ const headers = [
   'Created At',
 ]
 
-onBeforeMount(() => {
+onMounted(() => {
   loadCases()
 })
 
