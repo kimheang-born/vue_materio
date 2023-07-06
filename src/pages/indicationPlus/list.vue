@@ -44,6 +44,12 @@ const onClick = () => {
 </script>
 
 <template>
+  <VProgressLinear
+    v-if="isLoading"
+    indeterminate
+    color="primary"
+    class="mb-3"
+  />
   <VCard
     title="Filters"
     class="mb-6"
