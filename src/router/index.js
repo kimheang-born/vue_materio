@@ -26,7 +26,7 @@ const router = createRouter({
         },
         {
           name: 'create-case',
-          path: 'case-list/create',
+          path: 'case/create',
           component: () => import('../pages/indicationPlus/create.vue'),
         },
         {
