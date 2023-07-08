@@ -42,11 +42,16 @@ export default {
       }
     })
   },
+  getFormOptions(state) {
+    return state.formOptions
+  },
   getRecordTypes(state) {
-    return state.recordTypes
+    return state.formOptions?.record_types
   },
   getRecordTypesFormat(state) {
-    return state.recordTypes.map(option => option.value)
+    const data = state.formOptions?.record_types || [] 
+    
+    return data.map(option => option.value)
   },
   getPropertyTypes(state) {
     return state.propertyTypes
@@ -59,5 +64,10 @@ export default {
   },
   getCurrentUsesFormat(state) {
     return state.currentUses.map(option => option.value)
+  },
+  getPurposesFormat(state) {
+    const data = state.formOptions?.purpose || [] 
+    
+    return data.map(option => option.value)
   },
 }

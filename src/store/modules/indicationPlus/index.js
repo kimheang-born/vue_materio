@@ -7,9 +7,11 @@ export default {
   state() {
     return {
       cases: [],
+      formOptions: [],
       recordTypes: [],
       propertyTypes: [],
       currentUses: [],
+      purposes: [],
     }
   },
   mutations,

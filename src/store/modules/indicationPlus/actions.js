@@ -38,7 +38,7 @@ export default {
 
     context.commit('setCases', cases)
   },
-  async fetchRecordTypes(context) {
+  async fetchFormOptions(context) {
     const token = context.rootGetters.token
 
     const response = await axios.get(`${apiEndPoint}/api/v2/submitcase/form_option`, {
@@ -51,9 +51,7 @@ export default {
       throw new Error(`Request failed with status: ${response.status}`)
     }
 
-    const { record_types } = response?.data || []
-
-    context.commit('setRecordTypes', record_types)
+    context.commit('setFormOptions', response?.data || [])
   },
   fetchPropertyTypes(context, recordTypeSelected) {
     const selectedRecordType = context.getters.getRecordTypes.find(recordType => recordType.value === recordTypeSelected)

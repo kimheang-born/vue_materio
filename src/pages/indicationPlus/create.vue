@@ -6,10 +6,12 @@ const store = useStore()
 const selectedRecordType = ref(null)
 const selectedPropertyType = ref(null)
 const selectedCurrentUse = ref(null)
+const selectedPurpose = ref(null)
 
 const recordTypes = computed(() => store.getters['indicationPlus/getRecordTypesFormat'])
 const propertyTypes = computed(() => store.getters['indicationPlus/getPropertyTypesFormat'])
 const currentUses = computed(() => store.getters['indicationPlus/getCurrentUsesFormat'])
+const purposes = computed(() => store.getters['indicationPlus/getPurposesFormat'])
 
 const onRecordTypeChange = () => {
   selectedPropertyType.value = null
@@ -27,7 +29,7 @@ const submitForm = () => {
 }
 
 onMounted(() => {
-  store.dispatch('indicationPlus/fetchRecordTypes')
+  store.dispatch('indicationPlus/fetchFormOptions')
 })
 </script>
 
@@ -73,10 +75,11 @@ onMounted(() => {
               </VCol>
               <VCol cols="6">
                 <VSelect
-                  clearable
+                  v-model="selectedPurpose"
+                  :items="purposes"
                   label="Purpose"
-                  :items="['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']"
-                  variant="outlined"
+                  clearable
+                  item-text="text"
                 />
               </VCol>
             </VRow>
