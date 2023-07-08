@@ -60,7 +60,6 @@ export default {
 
     context.commit('setPropertyTypes', selectedRecordType?.children || [])
   },
-
   fetchCurrentUses(context, propertyTypeSelected) {
     const selectedPropertyType = context.getters.getPropertyTypes.find(propertyType => propertyType.value === propertyTypeSelected)
 
