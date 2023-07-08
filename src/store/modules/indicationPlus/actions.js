@@ -51,9 +51,9 @@ export default {
       throw new Error(`Request failed with status: ${response.status}`)
     }
 
-    const responseData = response?.data?.record_types
+    const { record_types } = response?.data || []
 
-    context.commit('setRecordTypes', responseData)
+    context.commit('setRecordTypes', record_types)
   },
   fetchPropertyTypes(context, recordTypeSelected) {
     const selectedRecordType = context.getters.getRecordTypes.find(recordType => recordType.value === recordTypeSelected)
