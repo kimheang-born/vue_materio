@@ -38,4 +38,32 @@ export default {
 
     context.commit('setCases', cases)
   },
+  async fetchRecordTypes(context) {
+    const token = context.rootGetters.token
+
+    const response = await axios.get(`${apiEndPoint}/api/v2/submitcase/form_option`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+
+    if (response.status !== 200) {
+      throw new Error(`Request failed with status: ${response.status}`)
+    }
+
+    const responseData = response?.data?.record_types
+
+    context.commit('setRecordTypes', responseData)
+  },
+  fetchPropertyTypes(context, recordTypeSelected) {
+    const selectedRecordType = context.getters.getRecordTypes.find(recordType => recordType.value === recordTypeSelected)
+
+    context.commit('setPropertyTypes', selectedRecordType?.children || [])
+  },
+
+  fetchCurrentUses(context, propertyTypeSelected) {
+    const selectedPropertyType = context.getters.getPropertyTypes.find(propertyType => propertyType.value === propertyTypeSelected)
+
+    context.commit('setCurrentUses', selectedPropertyType?.children || [])
+  },
 }

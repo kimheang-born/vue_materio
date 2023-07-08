@@ -7,6 +7,9 @@ export default {
   state() {
     return {
       cases: [],
+      recordTypes: [],
+      propertyTypes: [],
+      currentUses: [],
     }
   },
   mutations,

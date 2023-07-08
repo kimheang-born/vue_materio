@@ -1,5 +1,34 @@
 <script setup>
-const recordType = ref('')
+import { useStore } from 'vuex'
+
+const store = useStore()
+
+const selectedRecordType = ref(null)
+const selectedPropertyType = ref(null)
+const selectedCurrentUse = ref(null)
+
+const recordTypes = computed(() => store.getters['indicationPlus/getRecordTypesFormat'])
+const propertyTypes = computed(() => store.getters['indicationPlus/getPropertyTypesFormat'])
+const currentUses = computed(() => store.getters['indicationPlus/getCurrentUsesFormat'])
+
+const onRecordTypeChange = () => {
+  selectedPropertyType.value = null
+  selectedCurrentUse.value = null
+  store.dispatch('indicationPlus/fetchPropertyTypes', selectedRecordType.value)
+}
+
+const onPropertyTypeChange = () => {
+  selectedCurrentUse.value = null
+  store.dispatch('indicationPlus/fetchCurrentUses', selectedPropertyType.value)
+}
+
+const submitForm = () => {
+  console.log(1)
+}
+
+onMounted(() => {
+  store.dispatch('indicationPlus/fetchRecordTypes')
+})
 </script>
 
 <template>
@@ -11,32 +40,35 @@ const recordType = ref('')
     >
       <VCard title="Create Case">
         <VCardText>
-          <VForm @submit.prevent="() => {}">
+          <VForm @submit.prevent="submitForm">
             <VRow>
               <VCol cols="6">
                 <VSelect
-                  v-model="recordType"
+                  v-model="selectedRecordType"
+                  :items="recordTypes"
+                  label="Record Type"
                   clearable
-                  label="Record Type *"
-                  :items="['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']"
-                  variant="outlined"
-                  :rules="[v => !!v || 'Record Type is required']"
-                />
+                  item-text="text"
+                  @update:model-value="onRecordTypeChange"
+                /> 
               </VCol>
               <VCol cols="6">
                 <VSelect
-                  clearable
+                  v-model="selectedPropertyType"
+                  :items="propertyTypes"
                   label="Property Type"
-                  :items="['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']"
-                  variant="outlined"
+                  clearable
+                  item-text="text"
+                  @update:model-value="onPropertyTypeChange"
                 />
               </VCol>
               <VCol cols="6">
                 <VSelect
-                  clearable
+                  v-model="selectedCurrentUse"
+                  :items="currentUses"
                   label="Current Use"
-                  :items="['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']"
-                  variant="outlined"
+                  clearable
+                  item-text="text"
                 />
               </VCol>
               <VCol cols="6">

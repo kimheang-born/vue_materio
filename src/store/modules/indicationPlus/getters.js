@@ -42,4 +42,22 @@ export default {
       }
     })
   },
+  getRecordTypes(state) {
+    return state.recordTypes
+  },
+  getRecordTypesFormat(state) {
+    return state.recordTypes.map(option => option.value)
+  },
+  getPropertyTypes(state) {
+    return state.propertyTypes
+  },
+  getPropertyTypesFormat(state) {
+    return state.propertyTypes.map(option => option.value)
+  },
+  getCurrentUses(state) {
+    return state.currentUses
+  },
+  getCurrentUsesFormat(state) {
+    return state.currentUses.map(option => option.value)
+  },
 }
