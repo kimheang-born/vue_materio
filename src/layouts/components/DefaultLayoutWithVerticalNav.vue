@@ -84,7 +84,7 @@ const upgradeBanner = computed(() => {
         :item="{
           title: 'Indication Plus',
           icon: 'mdi-finance',
-          to: '/case-list',
+          to: '/case',
         }"
       />
 

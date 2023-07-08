@@ -19,8 +19,8 @@ const router = createRouter({
           meta: { requiresAuth: true },
         },
         {
-          name: 'case-list',
-          path: 'case-list',
+          name: 'case',
+          path: 'case',
           component: () => import('../pages/indicationPlus/list.vue'),
           meta: { requiresAuth: true },
         },

@@ -54,7 +54,7 @@ const recordType = ref('')
                   color="secondary"
                   variant="tonal"
                   class="text-capitalize"
-                  :to="{ name: 'case-list' }"
+                  :to="{ name: 'case' }"
                 >
                   Cancel
                 </VBtn>
