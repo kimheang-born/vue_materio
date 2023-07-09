@@ -7,15 +7,25 @@ const selectedRecordType = ref(null)
 const selectedPropertyType = ref(null)
 const selectedCurrentUse = ref(null)
 const selectedPurpose = ref(null)
+const toggleCurrentUseColumn = ref(true)
 
 const recordTypes = computed(() => store.getters['indicationPlus/getRecordTypesFormat'])
 const propertyTypes = computed(() => store.getters['indicationPlus/getPropertyTypesFormat'])
 const currentUses = computed(() => store.getters['indicationPlus/getCurrentUsesFormat'])
 const purposes = computed(() => store.getters['indicationPlus/getPurposesFormat'])
 
+const hideOrShowCurrentUse = recordType => {
+  const toggle = ['Land', 'Land and Building'].includes(recordType)
+
+  toggleCurrentUseColumn.value = toggle
+}
+
 const onRecordTypeChange = () => {
   selectedPropertyType.value = null
   selectedCurrentUse.value = null
+
+  hideOrShowCurrentUse(selectedRecordType.value)
+
   store.dispatch('indicationPlus/fetchPropertyTypes', selectedRecordType.value)
 }
 
@@ -64,7 +74,10 @@ onMounted(() => {
                   @update:model-value="onPropertyTypeChange"
                 />
               </VCol>
-              <VCol cols="6">
+              <VCol
+                v-if="toggleCurrentUseColumn"
+                cols="6"
+              >
                 <VSelect
                   v-model="selectedCurrentUse"
                   :items="currentUses"
