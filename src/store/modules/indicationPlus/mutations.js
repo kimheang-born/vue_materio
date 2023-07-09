@@ -3,7 +3,7 @@ export default {
     state.cases = payload
   },
   setFormOptions(state, options) {
-    return state.formOptions = options
+    state.formOptions = options
   },
   setRecordTypes(state, recordTypes) {
     state.recordTypes = recordTypes
