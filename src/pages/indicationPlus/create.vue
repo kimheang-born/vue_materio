@@ -15,6 +15,10 @@ const propertyTypes = computed(() => store.getters['indicationPlus/getPropertyTy
 const currentUses = computed(() => store.getters['indicationPlus/getCurrentUsesFormat'])
 const purposes = computed(() => store.getters['indicationPlus/getPurposesFormat'])
 
+const landShapeTypes = computed(() => store.getters['indicationPlus/getLandShapeTypesFormat'])
+const topographies = computed(() => store.getters['indicationPlus/getTopographiesFormat'])
+const sitePositions = computed(() => store.getters['indicationPlus/getSitePositionsFormat'])
+
 const hideOrShowCurrentUse = recordType => {
   const toggle = ['Land', 'Land and Building'].includes(recordType)
 
@@ -161,7 +165,7 @@ onMounted(() => {
                 sm="12"
               >
                 <VSelect
-                  :items="['Square']"
+                  :items="landShapeTypes"
                   label="Shape *"
                   clearable
                   item-text="text"
@@ -173,7 +177,7 @@ onMounted(() => {
                 sm="12"
               >
                 <VSelect
-                  :items="['Square']"
+                  :items="topographies"
                   label="Topography *"
                   clearable
                   item-text="text"
@@ -185,7 +189,7 @@ onMounted(() => {
                 sm="12"
               >
                 <VSelect
-                  :items="['Square']"
+                  :items="sitePositions"
                   label="Site Position *"
                   clearable
                   item-text="text"

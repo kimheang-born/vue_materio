@@ -70,4 +70,19 @@ export default {
     
     return data.map(option => option.value)
   },
+  getLandShapeTypesFormat(state) {
+    const data = state.formOptions?.land_shape_types || [] 
+    
+    return data.map(option => option.value)
+  },
+  getTopographiesFormat(state) {
+    const data = state.formOptions?.topography || [] 
+    
+    return data.map(option => option.value)
+  },
+  getSitePositionsFormat(state) {
+    const data = state.formOptions?.site_position || [] 
+    
+    return data.map(option => option.value)
+  },
 }
