@@ -9,6 +9,7 @@ const selectedCurrentUse = ref(null)
 const selectedPurpose = ref(null)
 const toggleCurrentUseColumn = ref(true)
 
+// Property Description
 const recordTypes = computed(() => store.getters['indicationPlus/getRecordTypesFormat'])
 const propertyTypes = computed(() => store.getters['indicationPlus/getPropertyTypesFormat'])
 const currentUses = computed(() => store.getters['indicationPlus/getCurrentUsesFormat'])
@@ -50,11 +51,18 @@ onMounted(() => {
       md="12"
       sm="6"
     >
-      <VCard title="Create Case">
-        <VCardText>
-          <VForm @submit.prevent="submitForm">
+      <VForm @submit.prevent="submitForm">
+        <VCard
+          title="Property Description"
+          class="mb-5"
+        >
+          <VCardText>
             <VRow>
-              <VCol cols="6">
+              <VCol
+                cols="6"
+                md="6"
+                sm="12"
+              >
                 <VSelect
                   v-model="selectedRecordType"
                   :items="recordTypes"
@@ -64,7 +72,11 @@ onMounted(() => {
                   @update:model-value="onRecordTypeChange"
                 /> 
               </VCol>
-              <VCol cols="6">
+              <VCol
+                cols="6"
+                md="6"
+                sm="12"
+              >
                 <VSelect
                   v-model="selectedPropertyType"
                   :items="propertyTypes"
@@ -77,6 +89,8 @@ onMounted(() => {
               <VCol
                 v-if="toggleCurrentUseColumn"
                 cols="6"
+                md="6"
+                sm="12"
               >
                 <VSelect
                   v-model="selectedCurrentUse"
@@ -86,7 +100,11 @@ onMounted(() => {
                   item-text="text"
                 />
               </VCol>
-              <VCol cols="6">
+              <VCol
+                cols="6"
+                md="6"
+                sm="12"
+              >
                 <VSelect
                   v-model="selectedPurpose"
                   :items="purposes"
@@ -96,29 +114,109 @@ onMounted(() => {
                 />
               </VCol>
             </VRow>
-            <VRow justify="end">
-              <VCol cols="auto">
-                <VBtn
-                  color="secondary"
-                  variant="tonal"
-                  class="text-capitalize"
-                  :to="{ name: 'case' }"
-                >
-                  Cancel
-                </VBtn>
+          </VCardText>
+        </VCard>
+        <VCard
+          title="Land Information"
+          class="mb-5"
+        >
+          <VCardText>
+            <VRow>
+              <VCol
+                cols="6"
+                md="6"
+                sm="12"
+              >
+                <VTextField
+                  label="Land Width (m) *"
+                  variant="outlined"
+                  type="number"
+                />
               </VCol>
-              <VCol cols="auto">
-                <VBtn
-                  type="submit"
-                  class="text-capitalize"
-                >
-                  Submit
-                </VBtn>
+              <VCol
+                cols="6"
+                md="6"
+                sm="12"
+              >
+                <VTextField
+                  label="Land Length (m)"
+                  variant="outlined"
+                  type="number"
+                />
+              </VCol>
+              <VCol
+                cols="6"
+                md="6"
+                sm="12"
+              >
+                <VTextField
+                  label="Land Area (m²) *"
+                  variant="outlined"
+                  type="number"
+                />
+              </VCol>
+              <VCol
+                cols="6"
+                md="6"
+                sm="12"
+              >
+                <VSelect
+                  :items="['Square']"
+                  label="Shape *"
+                  clearable
+                  item-text="text"
+                />
+              </VCol>
+              <VCol
+                cols="6"
+                md="6"
+                sm="12"
+              >
+                <VSelect
+                  :items="['Square']"
+                  label="Topography *"
+                  clearable
+                  item-text="text"
+                />
+              </VCol>
+              <VCol
+                cols="6"
+                md="6"
+                sm="12"
+              >
+                <VSelect
+                  :items="['Square']"
+                  label="Site Position *"
+                  clearable
+                  item-text="text"
+                />
               </VCol>
             </VRow>
-          </VForm>
+          </VCardText>
+        </VCard>
+        <VCardText>
+          <VRow justify="end">
+            <VCol cols="auto">
+              <VBtn
+                color="secondary"
+                variant="tonal"
+                class="text-capitalize"
+                :to="{ name: 'case' }"
+              >
+                Cancel
+              </VBtn>
+            </VCol>
+            <VCol cols="auto">
+              <VBtn
+                type="submit"
+                class="text-capitalize"
+              >
+                Submit
+              </VBtn>
+            </VCol>
+          </VRow>
         </VCardText>
-      </VCard>
+      </VForm>
     </VCol>
   </div>
 </template>
