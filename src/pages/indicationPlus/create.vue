@@ -39,8 +39,25 @@ const onPropertyTypeChange = () => {
   store.dispatch('indicationPlus/fetchCurrentUses', selectedPropertyType.value)
 }
 
-const submitForm = () => {
-  console.log(1)
+const isLoading = ref(false)
+const error = ref(null)
+
+const submitForm = async () => {
+  isLoading.value = true
+
+  try {
+    await store.dispatch('indicationPlus/submitCase', {
+      record_type: selectedRecordType.value,
+      property_type: selectedPropertyType.value,
+      current_use: selectedCurrentUse.value,
+      purpose_of_property: selectedPurpose.value,
+    })
+    
+  } catch (err) {
+    error.value = err.message || 'Data cannot be submitted.'
+  }
+
+  isLoading.value = false
 }
 
 onMounted(() => {
@@ -50,6 +67,13 @@ onMounted(() => {
 
 <template>
   <div>
+    <BaseDialog
+      :show="isLoading"
+      title="Saving..."
+      fixed
+    >
+      <BaseSpinner />
+    </BaseDialog>
     <VCol
       cols="12"
       md="12"

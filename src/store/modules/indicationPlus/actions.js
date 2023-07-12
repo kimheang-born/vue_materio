@@ -63,4 +63,44 @@ export default {
 
     context.commit('setCurrentUses', selectedPropertyType?.children || [])
   },
+  async submitCase(context, data) {
+    const token = context.rootGetters.token
+
+    const headers = {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    }
+
+    console.log(data)
+
+    const body = {
+      case_type: 'Indication',
+      purpose_of_property: data.purpose_of_property,
+      record_type: data.record_type,
+      property_type: data.property_type,
+      current_use: data.current_use,
+      property_land_width: null,
+      property_land_length: null,
+      property_land_area: null,
+      property_latitude: null,
+      property_longitude: null,
+      address_code: null,
+      topography: null,
+      land_shape_type: null,
+      image: null,
+      image_back_side: null,
+    }
+
+    const response = await axios.post(`${apiEndPoint}/api/v2/submit_cases`, body, { headers })
+      .then(response => {
+        console.log(response.data)
+      })
+      .catch(error => {
+        console.error(error?.response?.data?.errors || null)
+      })
+
+    if (response.status !== 200) {
+      throw new Error(`Request failed with status: ${response.status}`)
+    }
+  },
 }
